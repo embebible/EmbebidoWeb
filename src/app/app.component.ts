@@ -19,14 +19,12 @@ export class AppComponent implements OnInit {
   }
 
   onSearchURL(): void {
-    const value = (document.querySelector('#search') as HTMLInputElement).value;
+    let value = (document.querySelector('#search') as HTMLInputElement).value;
     if(value.match(/^https:\/\/.*/)) {
       this.renderPageWeb = value;
     } else {
       this.showAlertUrl = true;
-      setTimeout(() => {
-        this.showAlertUrl = false;
-      }, 5000);
+      (document.querySelector('#search') as HTMLInputElement).value = '';
     }
   }
 
