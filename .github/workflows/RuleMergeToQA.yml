@@ -1,0 +1,16 @@
+name: Merge to QA
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  restrict-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check target branch
+        if: github.event.pull_request.base.ref != 'qa'
+        run: |
+          echo "Pull request targeting ${GITHUB_REF} is not allowed."
+          exit 1
