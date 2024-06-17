@@ -10,7 +10,7 @@ import { initFlowbite } from 'flowbite';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-
+  showAlertUrl: boolean = false;
   renderPageWeb: string = '';
 
   ngOnInit(): void {
@@ -19,11 +19,12 @@ export class AppComponent implements OnInit {
   }
 
   onSearchURL(): void {
-    const value = (document.querySelector('#search') as HTMLInputElement).value;
+    let value = (document.querySelector('#search') as HTMLInputElement).value;
     if(value.match(/^https:\/\/.*/)) {
       this.renderPageWeb = value;
     } else {
-      alert('Ingresa una URL válida');
+      this.showAlertUrl = true;
+      (document.querySelector('#search') as HTMLInputElement).value = '';
     }
   }
 
