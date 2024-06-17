@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 @Component({
@@ -11,7 +12,9 @@ import { initFlowbite } from 'flowbite';
 })
 export class AppComponent implements OnInit {
   showAlertUrl: boolean = false;
-  renderPageWeb: string = '';
+  renderPageWeb: SafeResourceUrl = '';
+
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     initFlowbite();
@@ -21,9 +24,11 @@ export class AppComponent implements OnInit {
   onSearchURL(): void {
     let value = (document.querySelector('#search') as HTMLInputElement).value;
     if(value.match(/^https:\/\/.*/)) {
-      this.renderPageWeb = value;
+      this.showAlertUrl = false;
+      this.renderPageWeb = this.sanitizer.bypassSecurityTrustResourceUrl(value);;
     } else {
       this.showAlertUrl = true;
+      this.renderPageWeb = '';
       (document.querySelector('#search') as HTMLInputElement).value = '';
     }
   }

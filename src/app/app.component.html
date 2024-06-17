@@ -114,7 +114,7 @@
         <div class="h-[64px] w-[3px] bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>
         <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-800">
               @if (this.renderPageWeb) {
-                <iframe class="hidden dark:block w-[272px] h-[572px]" alt="" src=" https://eazycar.com.mx/" frameborder="0"></iframe>                
+                <iframe class="hidden dark:block w-[272px] h-[572px]" alt="" [src]="renderPageWeb" frameborder="0"></iframe>                
               } 
               @else {
                 <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/mockup-2-light.png" class="dark:hidden w-[272px] h-[572px]" alt="">
